@@ -27,8 +27,8 @@ typedef struct {
 } ngx_http_lua_map_ctx_t;
 
 
-static ngx_int_t ngx_http_lua_map_by_lua_chunk(lua_State *L, ngx_http_request_t *r,
-    ngx_http_variable_value_t *v, uintptr_t data);
+static ngx_int_t ngx_http_lua_map_by_lua_chunk(lua_State *L,
+    ngx_http_request_t *r, ngx_http_variable_value_t *v, uintptr_t data);
 static ngx_int_t ngx_http_lua_map_by_lua_init(ngx_http_request_t *r);
 
 
@@ -165,8 +165,8 @@ ngx_http_lua_map_handler_inline(ngx_http_request_t *r,
 
     if (ctx->evaluating || ngx_http_lua_map_evaluating) {
         ngx_log_error(NGX_LOG_WARN, r->connection->log, 0,
-                            "map_by_lua*: recursion while evaluating variable \"%V\"",
-                            &ctx->var->name);
+                    "map_by_lua*: recursion while evaluating variable \"%V\"",
+                    &ctx->var->name);
         return NGX_ERROR;
     }
 
@@ -210,8 +210,8 @@ ngx_http_lua_map_handler_file(ngx_http_request_t *r,
 
     if (ctx->evaluating || ngx_http_lua_map_evaluating) {
         ngx_log_error(NGX_LOG_WARN, r->connection->log, 0,
-                            "map_by_lua*: cycle while evaluating variable \"%V\"",
-                            &ctx->var->name);
+                    "map_by_lua*: recursion while evaluating variable \"%V\"",
+                    &ctx->var->name);
         return NGX_ERROR;
     }
 
