@@ -16,6 +16,7 @@
 #include "ngx_http_lua_contentby.h"
 #include "ngx_http_lua_rewriteby.h"
 #include "ngx_http_lua_accessby.h"
+#include "ngx_http_lua_mapby.h"
 #include "ngx_http_lua_logby.h"
 #include "ngx_http_lua_util.h"
 #include "ngx_http_lua_headerfilterby.h"
@@ -453,6 +454,20 @@ static ngx_command_t ngx_http_lua_cmds[] = {
       NGX_HTTP_SRV_CONF_OFFSET,
       0,
       (void *) ngx_http_lua_balancer_handler_file },
+
+    { ngx_string("map_by_lua_file"),
+      NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE2,
+      ngx_http_lua_map_by_lua,
+      NGX_HTTP_MAIN_CONF_OFFSET,
+      0,
+      (void *) ngx_http_lua_map_handler_file },
+
+    { ngx_string("map_by_lua_block"),
+      NGX_HTTP_MAIN_CONF|NGX_CONF_TAKE1|NGX_CONF_BLOCK,
+      ngx_http_lua_map_by_lua_block,
+      NGX_HTTP_MAIN_CONF_OFFSET,
+      0,
+      (void *) ngx_http_lua_map_handler_inline },
 
     { ngx_string("lua_socket_keepalive_timeout"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF
